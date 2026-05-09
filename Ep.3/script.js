@@ -49,7 +49,18 @@ const container = React.createElement(
   ],
 );
 
+<<<<<<< HEAD
 
+=======
+// const fistName = document.querySelector('.firstName');
+// const lastName = document.querySelector('.lastName');
+// const submitBTN = document.querySelector('.sumitBTN');
+// const showPara = document.querySelector('.showPara') ;
+
+// submitBTN.addEventListener("click", (e)=>{
+//     showPara.textContent = {fistName, lastName}
+// })
+>>>>>>> c5c843ada44841ccb20bb237ccce7d0b1173f0dd
 
 const root = ReactDOM.createRoot(document.querySelector("#root"));
 
