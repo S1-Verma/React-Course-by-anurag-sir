@@ -1,18 +1,18 @@
-import { useState } from 'react'
-import './App.css'
-import ExpenseForm from './components/ExpenseForm'
-import ExpenseTable from './components/ExpenseTable'
-import expenseData from './expenseData'
-import { useLocalStorage } from './hooks/useLocalStorage'
+import { useState } from "react";
+import "./App.css";
+import ExpenseForm from "./components/ExpenseForm";
+import ExpenseTable from "./components/ExpenseTable";
+import expenseData from "./expenseData";
+import { useLocalStorage } from "./Hooks/useLocalStorage";
 
 function App() {
-  const [expense, setExpense] = useLocalStorage('expense', {
-    title: '',
-    category: '',
-    amount: '',
-  })
-  const [expenses, setExpenses] = useLocalStorage('expenses', expenseData)
-  const [editingRowId, setEditingRowId] = useLocalStorage('editingRowId', '')
+  const [expense, setExpense] = useLocalStorage("expense", {
+    title: "",
+    category: "",
+    amount: "",
+  });
+  const [expenses, setExpenses] = useLocalStorage("expenses", expenseData);
+  const [editingRowId, setEditingRowId] = useLocalStorage("editingRowId", "");
 
   return (
     <main>
@@ -33,7 +33,8 @@ function App() {
         />
       </div>
     </main>
-  )
+  );
 }
+``;
 
-export default App
+export default App;
