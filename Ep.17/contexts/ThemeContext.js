@@ -7,8 +7,6 @@ export function ThemeProvider({ children }) {
     const [isDark, setIsDark] = useState(
     JSON.parse(localStorage.getItem("isDarkMode")),
   );
-  console.log(children); //  yaha se hume children se dono components mill jayenge header and Outlet jo humne App.jsx me theme provider me wrap kiye he 
-  
   return (
     <ThemeContext.Provider value={[isDark, setIsDark]}>
       {children}

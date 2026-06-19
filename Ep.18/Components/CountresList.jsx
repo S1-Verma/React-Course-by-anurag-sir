@@ -1,46 +1,43 @@
 import React, { useContext, useEffect, useState } from "react";
 import CountryCard from "./CountryCard";
 import Shimmer from "./Shimmer";
-import { usefilter, useFilter } from "./Hooks/useFilter";
+import { usefilter } from "./Hooks/useFilter";
+import { data } from "react-router";
 
 export default function CountresList() {
   const [loading, setLoading] = useState(true); // Loading state
   const { query, setQuery } = usefilter();
-  const [countriesData, setCountriesData] = useState(null);
+  const [countriesData, setCountriesData] = useState([]);
 
   useEffect(() => {
     fetch(
-      "https://restcountries.com/v3.1/all?fields=name,capital,currencies,region,population,flags,subregion,tld,languages,borders",
+      'https://api.restcountries.com/countries/v5?limit=100',
+      { headers: { 'Authorization': 'Bearer rc_live_1044cb3266ed46278b1e9aad92b514c1' } }
     )
-      .then((res) => res.json())
-      .then((data) => {
-        setCountriesData(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Data fetch error:", err);
-        setLoading(false);
+      .then(function (response) { return response.json(); })
+      .then(function ({ data }) {
+        console.log(data.objects);
+        setCountriesData(data.objects)
+        setLoading(false)
       });
+
   }, []);
 
   if (loading) {
     return <Shimmer />;
   }
 
-  const cardArr = countriesData
-    .filter(
-      (country) =>
-        country.name.common.toLowerCase().includes(query.toLowerCase()) ||
-        country.region.toLowerCase().includes(query.toLowerCase()),
-    )
+  const cardArr = countriesData?.filter((country) =>
+    country?.names?.common.toLowerCase().includes(query.toLowerCase()) ||
+      country?.region?.toLowerCase().includes(query.toLowerCase())
+  )
     .map((country) => {
-      const country_Name = country.name.common;
-      const country_flag = country.flags;
+      const country_Name = country.names.common;
+      const country_flag = country.flag;
       const countryPopulation = country.population.toLocaleString("en-IN");
       const region = country.region;
       const capital = country.capital;
-
-
+      
       return (
         <CountryCard
           key={country_Name}

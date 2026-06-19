@@ -2,11 +2,14 @@ import React  from 'react';
 import { Link } from 'react-router';
 
 const CountryCard = ({countryid, flag, countryName, countryPopulation, region, capital, data}) => {
+    if(flag.url_svg==='') {
+        flag.url_svg = null
+    }
     return (
         <Link className='country-card' to={`/${countryName}`} state={data} >
             {/* basically Link tage me hum state se data ko kisi dusre page par pass kar sakte he  our useState se kahi bhi accept kar sakte he */}
             <div className="imgbox">
-            <img src={flag.svg} alt={flag.alt}/>
+            <img src={flag.url_svg} alt='flag_img'/>
             </div>
             <div className="card-text">
                 <h3 className="card-title">{countryName}</h3>

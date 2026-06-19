@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import countriesData from "../countriesData/";
 import CountryCard from "./CountryCard";
 
-
-export default function CountresList({query}) {
-  
+export default function CountresList({query}) {  
   const cardArr = countriesData.filter(country => country.name.common.toLowerCase().includes(query)).map((country) => {
     const country_Name = country.name.common;
     const country_flag = country.flags;

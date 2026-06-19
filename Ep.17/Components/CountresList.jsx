@@ -7,13 +7,17 @@ export default function CountresList({ query }) {
   const [loading, setLoading] = useState(true); // Loading state
  
 
-  useEffect(() => {
-    fetch(
-      "https://restcountries.com/v3.1/all?fields=name,capital,currencies,region,population,flags,subregion,tld,languages,borders",
-    )
-      .then((res) => res.json())
+useEffect(() => {
+    // URL ke end me '/' lagane se 301 redirect aur CORS ka issue thik ho jata hai
+    fetch("https://restcountries.com/v3.1/all?fields=name,capital,currencies,region,population,flags,subregion,tld,languages,borders/")
+      .then((res) => {
+        if (!res.ok) throw new Error("Network response was not ok");
+        return res.json();
+      })
       .then((data) => {
-        setCountriesData(data);
+        console.log(data);
+        // Hamesha check karein ki data array hi ho
+        setCountriesData(Array.isArray(data) ? data : []);
         setLoading(false);
       })
       .catch((err) => {
@@ -26,10 +30,9 @@ export default function CountresList({ query }) {
     return <Shimmer />;
   }
 
-  const cardArr =  countriesData
-    .filter((country) =>
-      country.name.common.toLowerCase().includes(query.toLowerCase())||
-      country.region.toLowerCase().includes(query.toLowerCase())
+  const cardArr =  countriesData?.filter((country) =>
+      country?.name?.common?.toLowerCase().includes(query.toLowerCase())||
+      country?.region?.toLowerCase().includes(query.toLowerCase())
     )
     .map((country) => {
       const country_Name = country.name.common;
@@ -51,5 +54,5 @@ export default function CountresList({ query }) {
       );
     });
 
-  return <div className="countries-container">{cardArr}</div>;
+  return <div className="countries-container">{cardArr?.length > 0 ? cardArr : <p>No countries found!</p>}</div>;
 }

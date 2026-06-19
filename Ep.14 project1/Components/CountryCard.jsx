@@ -2,7 +2,7 @@ import React from 'react';
 
 const CountryCard = ({countryid, flag, countryName, populaton, region, capital}) => {
     return (
-        <a className='country-card' href='/country.html?name=Barbados' >
+        <a className='country-card' href={`/country.html?name=${countryName}`} >
             <div className="imgbox">
             <img src={flag.svg} alt={flag.alt}/>
             </div>
