@@ -1,3 +1,10 @@
+<<<<<<< HEAD
 dist
 .parcel-cache
 node_modules
+=======
+node_modules/
+.parcel-cache/
+dist/
+*.log
+>>>>>>> 10a489f53cdeeba9555d48576fef79d4d5ce8180

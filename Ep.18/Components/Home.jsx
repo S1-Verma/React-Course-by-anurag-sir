@@ -6,17 +6,18 @@ import { useTheme } from "./Hooks/useTheme";
 import { FilterProvider } from "../contexts/FilterContext";
 
 const Home = () => {
-  
   const [isDark] = useTheme();
+
   return (
     <FilterProvider>
-    <main className={`${isDark ? "dark" : ""}`}>
-      <div className="search-filter-container">
-        <SearchBar  />
-        <SelectMenu />
-      </div>
-      <CountresList />
-    </main>
+      <main className={`${isDark ? "dark" : ""}`}>
+        <div className="search-filter-container">
+          <SearchBar />
+          <SelectMenu />
+        </div>
+
+        <CountresList />
+      </main>
     </FilterProvider>
   );
 };

@@ -1,0 +1,28 @@
+
+.container{
+    display: flex ;
+    gap: 20px ;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.Card{
+    border: 2px solid;
+    width: 200px;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.img{
+    width:  150px;
+    object-fit: contain;
+}
+
+.img img{
+    width: 100% ;
+    
+}
+
+.name{
+    margin: 10px 0; 
+}

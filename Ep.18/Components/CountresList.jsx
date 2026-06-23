@@ -3,47 +3,33 @@ import CountryCard from "./CountryCard";
 import Shimmer from "./Shimmer";
 import { usefilter } from "./Hooks/useFilter";
 import { data } from "react-router";
+import { useData } from "./Hooks/useData";
 
 export default function CountresList() {
-  const [loading, setLoading] = useState(true); // Loading state
   const { query, setQuery } = usefilter();
-  const [countriesData, setCountriesData] = useState([]);
+  const [countriesData] = useData();
 
-  useEffect(() => {
-    fetch(
-      'https://api.restcountries.com/countries/v5?limit=100',
-      { headers: { 'Authorization': 'Bearer rc_live_1044cb3266ed46278b1e9aad92b514c1' } }
-    )
-      .then(function (response) { return response.json(); })
-      .then(function ({ data }) {
-        console.log(data.objects);
-        setCountriesData(data.objects)
-        setLoading(false)
-      });
-
-  }, []);
-
-  if (loading) {
+  if (countriesData.length === 0) {
     return <Shimmer />;
   }
 
   const cardArr = countriesData?.filter((country) =>
-    country?.names?.common.toLowerCase().includes(query.toLowerCase()) ||
-      country?.region?.toLowerCase().includes(query.toLowerCase())
+    country?.name.common.toLowerCase().includes(query.toLowerCase()) ||
+    country?.region?.toLowerCase().includes(query.toLowerCase())
   )
     .map((country) => {
-      const country_Name = country.names.common;
-      const country_flag = country.flag;
-      const countryPopulation = country.population.toLocaleString("en-IN");
+      const country_Name = country.name.common;
+      const country_flag = country.flagImg
+      const area = country.area;
       const region = country.region;
       const capital = country.capital;
-      
+
       return (
         <CountryCard
           key={country_Name}
           countryName={country_Name}
           flag={country_flag}
-          countryPopulation={countryPopulation}
+          area={area}
           region={region}
           capital={capital}
           data={country}
@@ -52,4 +38,5 @@ export default function CountresList() {
     });
 
   return <div className="countries-container">{cardArr}</div>;
+
 }

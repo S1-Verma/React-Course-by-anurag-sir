@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+/* .'text-blue-600 font-bold' : 'text-gray-600' */
+
+.isActive {
+    color: blue;
+    font:bold;
+}
