@@ -10,7 +10,7 @@ const Country = () => {
   const [isDark] = useTheme();
   const countryName = param.country;
 
- 
+
   const filtered = countriesData?.find(
     (country) => country.name.common.toLowerCase() === countryName.toLowerCase()
   );
@@ -65,8 +65,8 @@ const Country = () => {
                 <p>
                   <b>Native Name: </b>
                   <span className="native-name">
-                    {filtered.name.nativeName 
-                      ? Object.values(filtered.name.nativeName)[0]?.common 
+                    {filtered.name.nativeName
+                      ? Object.values(filtered.name.nativeName)[0]?.common
                       : filtered.name.common}
                   </span>
                 </p>
